@@ -1,0 +1,27 @@
+{% extends "mentions/base.html" %}
+
+{% block title %}Add client{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% load widget_tweaks %}
+
+      <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <form action="{% url 'client_add' %}" method="post" accept-charset="utf-8">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label }}</label>
+                {% if field.errors %}
+                    {{ field.errors }}
+                {% endif %}
+                {% render_field field class+="form-control"%}
+                </div>
+            {% endfor %}
+            <input type="hidden" name="next" value="{{ next }}" />
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

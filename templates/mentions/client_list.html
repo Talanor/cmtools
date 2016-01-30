@@ -1,0 +1,19 @@
+{% extends "mentions/base.html" %}
+
+{% block title %}List clients{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% load widget_tweaks %}
+
+      <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <a class="btn btn-success" href="{% url 'client_add' %}">Add client</a>
+        <ul>
+        {% for client in clients %}
+            <li><a href="{% url 'mention_list' client_id=client.id %}">{{ client.name }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
